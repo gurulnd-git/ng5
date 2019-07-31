@@ -15,7 +15,7 @@ phases:
       - npm install
   build:
     commands:
-      - ng build --prod
+      - npm build
   post_build:
     commands:
       - echo Build completed on `date`
