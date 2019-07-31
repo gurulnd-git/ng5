@@ -7,7 +7,6 @@ phases:
     commands:
       - echo Build for ${BUILD_ENV}
       - echo Installing source NPM dependencies...
-      - npm install
       - npm install -g @angular/cli
     runtime-versions:
       nodejs: 10
@@ -16,7 +15,7 @@ phases:
       - npm install
   build:
     commands:
-      - npm run build --prod
+      - ng build --prod
   post_build:
     commands:
       - echo Build completed on `date`
