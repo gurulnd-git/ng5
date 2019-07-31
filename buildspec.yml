@@ -4,18 +4,15 @@ env:
     BUILD_FOLDER: 'dist'
 phases:
   install:
-    commands:
-      - echo Build for ${BUILD_ENV}
-      - echo Installing source NPM dependencies...
-      - npm install -g @angular/cli
     runtime-versions:
       nodejs: 10
   pre_build:
     commands:
       - npm install
+      - npm install -g @angular/cli
   build:
     commands:
-      - npm build
+      - ng build --prod --aot
   post_build:
     commands:
       - echo Build completed on `date`
