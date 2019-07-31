@@ -15,4 +15,11 @@ phases:
       - npm build
   post_build:
     commands:
-      - echo Build completed on `date`
+       - echo Build completed on `date`
+       - echo Syncing site to S3 bucket...
+       - export LC_ALL=C.UTF-8
+       - cd dist && aws s3 sync --cache-control max-age=86400 --acl public-read --delete . https://s3.console.aws.amazon.com/s3/buckets/cloudfrontservice
+       - echo Finished sync.
+       - echo Invalidating CloudFront Edge Cache...
+       - aws cloudfront create-invalidation --distribution-id https://console.aws.amazon.com/cloudfront/home?region=ap-southeast-1#distribution-settings:E1HCAN3QWMC3LP --paths /*
+       - echo Finished invalidating CloudFront Edge Cache.
